@@ -1,0 +1,47 @@
+Given two binary strings, return their sum (also a binary string).
+
+The input strings are both non-empty and contains only characters 1 or 0.
+
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+
+
+Solution:
+
+class Solution(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        
+        def bin_to_dec(d):
+            l = len(list(d))
+            i = l
+            sum = 0 
+            j = 0
+            while i > 0 :
+                sum = sum + (pow(2, i-1) * int(d[j]))
+                i = i - 1
+                j = j + 1
+                
+            return sum
+            
+        def dec_to_bin(b):
+            if b == 0:
+                return "0"
+            f = list()
+            
+            while b >= 1:
+                f.append(b%2)
+                b = b//2
+            return "".join(str(x) for x in f[::-1])
+         
+        return dec_to_bin(bin_to_dec(a) + bin_to_dec(b))
